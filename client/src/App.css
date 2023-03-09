@@ -1,0 +1,180 @@
+/* GENERAL STYLING */
+.App {
+  display: flex;
+  flex-direction: column;
+  width: calc(3 * 100vw);
+  justify-content: center;
+  align-items: center;
+}
+
+.TopArea {
+  display: flex;
+  flex-direction: row;
+}
+
+.BottomArea {
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: url('./media/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* STYLING FOR THE HOME PAGE */
+.HomeBackground {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.HomeHeader {
+  font-size: 70px;
+  color: #41553A;
+  font-weight: 500;
+  margin: 10% 0 0 0;
+  padding: 0;
+  text-shadow: 0 0 5px #888;
+}
+
+.LocationHeaderOne {
+  font-size: 25px;
+  color: #41553A;
+  font-weight: 500;
+  margin: 5% 0 0 0;
+  padding: 0;
+}
+
+.LocationHeaderTwo {
+  font-size: 20px;
+  color: #41553A;
+  font-weight: 500;
+  margin: 5px 0 0 0;
+  padding: 0;
+}
+
+.NextOpeningHeader {
+  font-size: 30px;
+  color: #41553A;
+  font-weight: 500;
+  margin: 50px 0 0 0;
+  padding: 0;
+}
+
+.BuyTicketButton {
+  padding: 10px 15px 10px 15px;
+  background-color: white;
+  color: #41553A;
+  border-radius: 5px;
+  margin: 25px 0 0 0;
+  box-shadow: 0 0 8px #888;
+  transition: all 0.5s;
+}
+
+.BuyTicketButton:hover {
+  background-color: #41553A;
+  color: white;
+  cursor: pointer;
+}
+
+.ContactLinkArea {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.ContactLinkArea:hover {
+  cursor: pointer;
+  left: 20px;
+}
+
+.ArtistsLinkArea {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.ArtistsLinkArea:hover {
+  cursor: pointer;
+  right: 20px;
+}
+
+.ExhibitionsLinkArea {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.ExhibitionsLinkArea:hover {
+  cursor: pointer;
+  bottom: 20px;
+}
+
+.LinkArrow {
+  color: #41553A;
+  font-size: 20px;
+}
+
+.LinkText {
+  font-size: 20px;
+  color: #41553A;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+/* STYLING FOR THE ARTISTS PAGE */
+.ArtistsBackground {
+  width: 100vw;
+  height: 100vh;
+  display: inline-block;
+}
+
+/* STYLING FOR THE EXHIBITIONS PAGE */
+.ExhibitionsBackground {
+  width: 100vw;
+  height: 100vh;
+  display: inline-block;
+}
+
+/* STYLING FOR THE CONTACT PAGE */
+.ContactBackground {
+  width: 100vw;
+  height: 100vh;
+  display: inline-block;
+}
