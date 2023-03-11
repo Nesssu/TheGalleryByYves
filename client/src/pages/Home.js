@@ -1,7 +1,8 @@
 import '../App.css';
-import { IoIosArrowBack, IoIosArrowForward, IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward, IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { useRef, useEffect, useState } from 'react';
 import Artist from './Artist';
+import Exhibition from './Exhibition';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -68,7 +69,7 @@ function Home() {
 
                 <div className="ContactBackground" ref={ContactRef}>
                     <div className='ContactArea'>
-                        <div className='BackLinkArea MoveLeft' onClick={() => scrollToRef(HomeRef)}>
+                        <div className='BackLinkArea' onClick={() => scrollToRef(HomeRef)}>
                             <p className='LinkText'>Back</p>
                             <IoIosArrowForward className='LinkArrow'/>
                         </div>
@@ -123,7 +124,7 @@ function Home() {
                 <div className="ArtistsBackground" ref={ArtistsRef} >
 
                     <div className='ArtistsArea'>
-                        <div className='BackLinkArea MoveRight' onClick={() => scrollToRef(HomeRef)}>
+                        <div className='BackLinkArea' onClick={() => scrollToRef(HomeRef)}>
                             <IoIosArrowBack className='LinkArrow'/>
                             <p className='LinkText'>Back</p>
                         </div>
@@ -141,7 +142,21 @@ function Home() {
             <div className="BottomArea">
 
                 <div className="ExhibitionsBackground" ref={ExhibitionsRef} >
-                    <h1>Exhibitions</h1>
+                    
+                    <div className='ExhibitionsArea'>
+                        <div className='BackLinkArea' onClick={() => scrollToRef(HomeRef)} style={{"flex-direction": "column"}} >
+                            <IoIosArrowUp className='LinkArrow'/>
+                            <p className='LinkText'>Back</p>
+                        </div>
+
+                        <h1 className='Header'>Exhibitions</h1>
+
+                        <Exhibition photo={"one"} about={"Come and experience the beauty of nature and the great outdoors at our upcoming art exhibition! Our featured artists have captured the essence of the natural world in stunning paintings, sculptures, and mixed media pieces. From majestic mountains to peaceful streams, the artworks on display showcase the intricate details and colors of the environment. Take a journey through the wilderness and immerse yourself in the sights and sounds of nature. Join us for this captivating exhibition that celebrates the beauty and wonder of the great outdoors."} artist={"Alexandre"} name={"Canvas of the Outdoors"} date={"June 28th, 2023"} />
+                        <Exhibition photo={"two"} about={"Get ready to explore the fascinating world of animals at our upcoming art exhibition! From majestic tigers to playful dolphins, our featured artists have created breathtaking artworks that showcase the diversity and beauty of the animal kingdom. Using various techniques and mediums, each piece captures the unique personality and character of the animals, highlighting their strength, grace, and raw beauty. Whether you're an animal lover or simply appreciate stunning artwork, this exhibition is sure to captivate and inspire. Join us for a journey through the wild and wonderful world of animals, and experience the magic and wonder of the animal kingdom."} artist={"Sara"} name={"Vistas in Oil"} date={"July 12th, 2023"} />
+                        <Exhibition photo={"three"} about={"Get ready to experience the awe-inspiring world of abstract art at our upcoming exhibition! Our featured artists have created stunning works that challenge traditional forms of art, taking you on a journey through a world of color, shape, and texture. Using a variety of mediums and techniques, each piece invites you to explore the complex and multifaceted nature of the human experience. From bold brushstrokes to intricate patterns, the artworks on display offer a glimpse into the artist's imagination and emotions, creating a dynamic and thought-provoking exhibition that is sure to inspire and amaze. Join us for an unforgettable journey through the world of abstract art and discover the beauty of the unknown."} artist={"Sara"} name={"The Colors of the Earth"} date={"August 7th, 2023"} />
+
+                    </div>
+
                 </div>
 
             </div>
