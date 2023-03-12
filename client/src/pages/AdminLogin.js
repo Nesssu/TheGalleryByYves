@@ -44,10 +44,10 @@ function Login(props)
                     progress: undefined,
                     theme: "light",
                     });
+                
+                setPassword("");
             }
         });
-
-        setPassword("");
 
     }
 

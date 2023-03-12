@@ -32,6 +32,13 @@
   cursor: pointer;
 }
 
+.HorizontalSeparator {
+  width: 100%;
+  height: 1px;
+  background-color: #888;
+
+}
+
 .Header {
   font-size: 70px;
   color: #41553A;
@@ -477,13 +484,14 @@ body {
 
 /* STYLING FOR THE ADMIN LOGIN PAGE */
 .Button {
-  padding: 10px 20px 10px 20px;
+  padding: 10px 15px 10px 15px;
   border: solid;
+  min-width: 100px;
   border-width: thin;
   border-color: #41553A;
   background-color: white;
   color: #41553A;
-  font-size: medium;
+  font-size: small;
   font-weight: 500;
   border-radius: 5px;
   box-shadow: 0 0 10px #888;
@@ -498,17 +506,34 @@ body {
 }
 
 .Input {
-  padding: 10px 20px 10px 20px;
+  padding: 10px 15px 10px 15px;
   border: solid;
   border-width: thin;
   border-color: #41553A;
   border-radius: 5px;
-  font-size: medium;
+  font-size: small;
   font-weight: 500;
+  font-family: sans-serif;
   color: #41553A;
   outline: none;
   box-shadow: 0 0 10px #888;
   margin: 10px;
+}
+
+.Textarea {
+  padding: 10px 15px 10px 15px;
+  border: solid;
+  border-width: thin;
+  border-color: #41553A;
+  border-radius: 5px;
+  font-size: small;
+  font-weight: 500;
+  font-family: sans-serif;
+  color: #41553A;
+  outline: none;
+  box-shadow: 0 0 10px #888;
+  margin: 10px;
+  resize: none;
 }
 
 .LoginBackground {
@@ -526,4 +551,236 @@ body {
   font-weight: 500;
   color: #41553A;
   margin: 0 0 40px 0;
+}
+/* STYLING FOR THE ADMIN DASHBOARD PAGE */
+.DashboardBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.DashboardTop {
+  flex: 1;
+  width: 100vw;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.DashboardMiddle {
+  flex: 6;
+  width: 100vw;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+}
+
+.DashboardMiddleSide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.DashboardMiddleSide .Button {
+  margin: 10px 0 30px 0;
+}
+
+.DashboardHeader {
+  font-size: larger;
+  font-weight: 500;
+  color: #41553A;
+  margin: 10px 0 10px 0;
+}
+
+.EmailList {
+  background-color: white;
+  border-radius: 10px;
+  border: solid;
+  border-width: thin;
+  border-color: #41553A;
+  box-shadow: 0 0 10px #888;
+  font-size: medium;
+  font-weight: 500;
+  color: #41553A;
+  width: 80%;
+  max-width: 600px;
+  height: 60%;
+  padding: 10px 20px 10px 20px;
+  overflow: scroll;
+}
+
+.DashboardLink {
+  font-size: x-large;
+  font-weight: 500;
+  color: #41553A;
+  transition: all 0.5s;
+}
+
+.DashboardLink:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.Email {
+  font-size: medium;
+  margin: 10px 0 10px 0;
+}
+
+.DashboardBottom {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.DashboardExhibitionsBackground {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.DashboardExhibitionsArea {
+  display: 10;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.DashboardArtistsBackground {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.DashboardArtistsArea {
+  display: 10;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.DashboardArtExhContainer {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.SearchBarArea {
+  width: 95%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: row;
+}
+
+.SearchResultArea {
+  width: 95%;
+  max-width: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.ResultSide {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ResultSide .Textarea {
+  margin: 10px 5px 10px 5px;
+  width: calc(100% - 40px);
+  box-shadow: 0 0 5px #888;
+}
+
+.ResultSide .Input {
+  margin: 10px 5px 10px 5px;
+  width: calc(100% - 40px);
+  box-shadow: 0 0 5px #888;
+}
+.ResultInputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 550px;
+  padding: 10px 0 10px 0;
+}
+
+.ResultInputGroup .Input {
+  box-shadow: 0 0 5px #888;
+  margin: 0 10px 0 10px;
+}
+
+.ResultInputGroup .Textarea {
+  box-shadow: 0 0 5px #888;
+  margin: 10px 10px 10px 10px;
+}
+
+.ResultButtonArea {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.ResultButtonArea .Button {
+  box-shadow: 0 0 5px #888;
+  margin: 5px;
+  width: 100%;
+}
+
+.FileInput {
+  padding: 10px 15px 10px 15px;
+  border: solid;
+  min-width: 100px;
+  border-width: thin;
+  border-color: #41553A;
+  background-color: white;
+  color: #41553A;
+  font-size: small;
+  font-weight: 500;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #888;
+  margin: 10px;
+  transition: all 0.5s;
+}
+
+.FileInput:hover {
+  cursor: pointer;
+  background-color: #41553A;
+  color: white;
+}
+
+
+.NewArtistArea {
+  width: 95%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

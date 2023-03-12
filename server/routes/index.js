@@ -14,25 +14,33 @@ router.post('/api/add/subscribtion', body("email").isEmail(), (req, res, next) =
 
   const email = req.body.email;
 
-  Subscribtions.findOne({email}, (err, user) =>
+  Subscribtions.findOne({email})
+  .then((docs) =>
   {
-    if (err) throw err;
-    if (user) return res.json({success: true, message: "You are already subscribed!"});
+    if (docs) return res.json({success: true, message: "You are already subscribed!"});
     else
     {
-      Subscribtions.create(
+      Subscribtions.create({ email })
+        .then((doc) => 
         {
-          email
-        },
-        (err, ok) =>
+          if (doc) return res.json({success: true, message: "Subscribtion added!"})
+        })
+        .catch((err) =>
         {
           if (err) throw err;
-          else return res.json({success: true, message: "Subscribtion added!"})
-        }
-      )
+        })
     }
   })
 });
+
+router.get('/api/get/subscribtions', (req, res) =>
+{
+  Subscribtions.find()
+    .then((docs) =>
+    {
+      return res.json({docs});
+    })
+})
 
 router.get('/api/get/next/exhibition', (req, res, next) =>
 {

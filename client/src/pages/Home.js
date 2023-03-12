@@ -18,8 +18,19 @@ function Home() {
     const scrollToRef = (ref) => { if (ref.current) { ref.current.scrollIntoView(); CurrentRef.current = ref.current; } }
     const handleEmailChange = (event) => { setEmail(event.target.value); }
     const handleSubscribtion = () => {
-        // Send the email to the server. The server will check if the email has a correct format.
-        // Toast message will be shown based on the success of the subscribtion.
+        fetch('/api/add/subscribtion', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({email: email})
+        })
+        .then(response => response.json())
+        .then(json =>
+            {
+                showToast(json.message);
+                setEmail("");
+            })
     }
     const showToast = (message) =>
     {
