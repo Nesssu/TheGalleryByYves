@@ -559,228 +559,86 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  padding: 60px 0 0 0;
 }
 
-.DashboardTop {
-  flex: 1;
+.Navbar {
   width: 100vw;
+  height: 50px;
+  border-bottom: solid;
+  border-color: #41553A;
+  border-width: thin;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
+  position: fixed;
+  top: 0; 
 }
 
-.DashboardMiddle {
-  flex: 6;
-  width: 100vw;
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  overflow: scroll;
-}
-
-.DashboardMiddleSide {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 0;
-  justify-content: center;
-  align-items: center;
-}
-
-.DashboardMiddleSide .Button {
-  margin: 10px 0 30px 0;
-}
-
-.DashboardHeader {
-  font-size: larger;
-  font-weight: 500;
-  color: #41553A;
-  margin: 10px 0 10px 0;
-}
-
-.EmailList {
-  background-color: white;
-  border-radius: 10px;
-  border: solid;
-  border-width: thin;
-  border-color: #41553A;
-  box-shadow: 0 0 10px #888;
+.NavbarLink {
   font-size: medium;
-  font-weight: 500;
-  color: #41553A;
-  width: 80%;
-  max-width: 600px;
-  height: 60%;
-  padding: 10px 20px 10px 20px;
-  overflow: scroll;
-}
-
-.DashboardLink {
-  font-size: x-large;
-  font-weight: 500;
+  font-weight: normal;
+  font-family: sans-serif;
   color: #41553A;
   transition: all 0.5s;
 }
 
-.DashboardLink:hover {
-  text-decoration: underline;
+.NavbarLink:hover {
   cursor: pointer;
-}
-
-.Email {
-  font-size: medium;
-  margin: 10px 0 10px 0;
-}
-
-.DashboardBottom {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-}
-
-.DashboardExhibitionsBackground {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.DashboardExhibitionsArea {
-  display: 10;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-}
-
-.DashboardArtistsBackground {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.DashboardArtistsArea {
-  display: 10;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-}
-
-.DashboardArtExhContainer {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  scroll-behavior: smooth;
+  text-decoration: underline;
 }
 
 .SearchBarArea {
-  width: 95%;
-  max-width: 550px;
-  display: flex;
-  flex-direction: row;
-}
-
-.SearchResultArea {
-  width: 95%;
-  max-width: 550px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-}
-
-.ResultSide {
-  flex: 1;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.ResultSide .Textarea {
-  margin: 10px 5px 10px 5px;
-  width: calc(100% - 40px);
-  box-shadow: 0 0 5px #888;
-}
-
-.ResultSide .Input {
-  margin: 10px 5px 10px 5px;
-  width: calc(100% - 40px);
-  box-shadow: 0 0 5px #888;
-}
-.ResultInputGroup {
-  display: flex;
-  flex-direction: column;
+.SearchBarArea .Input {
   width: 100%;
-  max-width: 550px;
-  padding: 10px 0 10px 0;
-}
-
-.ResultInputGroup .Input {
-  box-shadow: 0 0 5px #888;
-  margin: 0 10px 0 10px;
-}
-
-.ResultInputGroup .Textarea {
-  box-shadow: 0 0 5px #888;
-  margin: 10px 10px 10px 10px;
-}
-
-.ResultButtonArea {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-}
-
-.ResultButtonArea .Button {
-  box-shadow: 0 0 5px #888;
-  margin: 5px;
-  width: 100%;
-}
-
-.FileInput {
   padding: 10px 15px 10px 15px;
+  margin: 10px 10px 0 10px;
+}
+
+.SearchListBackground {
+  width: 100%;
+  margin: 2px 10px 10px 10px;
+  padding: 0px 15px 0px 15px;
+  border-radius: 5px;
   border: solid;
-  min-width: 100px;
   border-width: thin;
   border-color: #41553A;
-  background-color: white;
-  color: #41553A;
-  font-size: small;
-  font-weight: 500;
-  border-radius: 5px;
   box-shadow: 0 0 10px #888;
-  margin: 10px;
-  transition: all 0.5s;
-}
-
-.FileInput:hover {
-  cursor: pointer;
-  background-color: #41553A;
-  color: white;
-}
-
-
-.NewArtistArea {
-  width: 95%;
-  max-width: 550px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
+}
+
+.SearchResultItem {
+  font-family: sans-serif;
+  list-style-type: none;
+  font-size: small;
+  color: #41553A;
+  font-weight: 500;
+  margin: 5px 0 5px 0;
+  transition: all 0.25s;
+}
+
+.SearchResultItem:hover {
+  cursor: pointer;
+  background-color: #888;
+}
+
+.EmptySearchBar {
+  font-size: small;
+  font-weight: 200;
+  font-family: sans-serif;
+  font-style: italic;
+  color: #41553A;
+  margin: 5px 0 5px 0;
 }
