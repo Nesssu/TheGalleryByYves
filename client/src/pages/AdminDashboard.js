@@ -2,49 +2,56 @@ import '../App.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-function SearchResult(props)
+function SearchResultArtist(props)
 {
     const [name, setName] = useState(props.name);
     const [bio, setBio] = useState(props.bio);
     const [path, setPath] = useState(null);
-    
-    const handleNameChange = (event) => { setName(event.target.value); }
-    const handleBioChange = (event) => { setBio(event.target.value); }
-    const handlePathChange = (event) => { setPath(event.target.files[0]); }
+
+    const handlePathChange = (event) =>
+    {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e)
+        {
+            setPath(e.target.result);
+        }
+
+        reader.readAsDataURL(file);
+    }
 
     return (
-            <div className='SearchResultArea'>
-                <div className='ResultSide' >
-                    <textarea type="text" className='Textarea' placeholder="Bio" rows={8} value={bio} onChange={handleBioChange} />
-                </div> 
-                <div className='ResultSide'>
-                    <input type="text" className='Input' value={name} onChange={handleNameChange} placeholder="Artists' name" />
-                    <label htmlFor='FileInput' className='FileInput' >
-                        <input type="file" onChange={handlePathChange} style={{display: "none"}} id="FileInput" />
-                        Choose new image
-                    </label>
-                    <div className='ResultButtonArea'>
-                        <input type="button" className='Button' value="Delete" />
-                        <input type="button" className='Button' value="Edit" />
-                    </div>
+        <div className='SearchResultArea'>
+            <div className='SearchResultLeftSide'>
+                <img src={path ? path : require("../media/art_one.jpg")} className="SearchImage" alt="" />
+                <div className='ChangeImageContainer'>
+                    <input type="file" onChange={handlePathChange} style={{display: "none"}} />
                 </div>
             </div>
+
+            <div className='SearchResultRightSide'>
+
+            </div>
+        </div>
     )
 };
 
 function ResultList(props)
 {
-    const emails = props.emails.filter(email => email.email.includes(props.searchTerm));
+    const emails = props.emails.filter(email => email.email.includes(props.searchTerm.toLowerCase()));
     const items = emails.slice(0, 5);
     return (
         <div className='SearchListBackground'>
-            <ul style={{padding: "0", margin: "5px 0 5px 0"}}>
+            <ul style={{padding: "0", margin: "0", width: "100%"}}>
                 {items.length !== 0 ? ( <div>
                     {items.map((email, index) => 
                     (
-                        <li key={index} className="SearchResultItem">{email.email}</li>
+                        <div className='FilterArea' onClick={() => props.search(email.email)} >
+                            <li key={index} className="SearchResultItem">{email.email}</li>
+                            <li key={index + "" + index} className="SearchResultType">Email</li>
+                        </div>
                     ))} </div> )
                     : 
                     ( <div>
@@ -179,6 +186,10 @@ function AdminDashboard(props)
         navigate("/admin");
     }
     const scrollToView = (ref) => { ref.current.scrollIntoView(); }
+    const search = (value) =>
+    {
+        setSearchTerm("");
+    }
 
     useEffect(() =>
     {
@@ -237,13 +248,11 @@ function AdminDashboard(props)
             <div className='SearchBarArea'>
                 <input  type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="Input" placeholder='Search artists or exhibitions' />
                 {searchTerm !== "" &&
-                    <ResultList emails={emails} searchTerm={searchTerm} />
+                    <ResultList emails={emails} searchTerm={searchTerm} search={search} />
                 }
             </div>
 
-            <div className='SearchResultArea'>
-
-            </div>
+            <SearchResultArtist />
 
             <div className='NewArtistsArea'>
 
