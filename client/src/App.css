@@ -489,8 +489,8 @@ body {
   min-width: 100px;
   border-width: thin;
   border-color: #41553A;
-  background-color: white;
-  color: #41553A;
+  background-color: #41553A;
+  color: white;
   font-size: small;
   font-weight: 500;
   border-radius: 5px;
@@ -501,8 +501,8 @@ body {
 
 .Button:hover {
   cursor: pointer;
-  background-color: #41553A;
-  color: white;
+  background-color: white;
+  color: #41553A;
 }
 
 .Input {
@@ -555,26 +555,35 @@ body {
 /* STYLING FOR THE ADMIN DASHBOARD PAGE */
 .DashboardBackground {
   width: 100vw;
-  height: 100vh;
   background-color: white;
+  height: calc(100vh - 90px);
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: scroll;
-  padding: 60px 0 0 0;
+  scroll-behavior: smooth;
+  padding: 60px 0 30px 0;
+}
+
+.DashboardHeader {
+  font-size: x-large;
+  color: #41553A;
+  font-weight: 500;
+  text-decoration: underline;
+  margin: 10px 0 10px 0;
 }
 
 .Navbar {
   width: 100vw;
   height: 50px;
-  border-bottom: solid;
-  border-color: #41553A;
-  border-width: thin;
   display: flex;
   flex-direction: row;
+  background-color:#41553A;
+  z-index: 2;
   align-items: center;
   justify-content: space-evenly;
   position: fixed;
+  box-shadow: 0 0 10px #888;
   top: 0; 
 }
 
@@ -582,7 +591,7 @@ body {
   font-size: medium;
   font-weight: normal;
   font-family: sans-serif;
-  color: #41553A;
+  color: white;
   transition: all 0.5s;
 }
 
@@ -597,6 +606,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .SearchBarArea .Input {
@@ -618,6 +628,11 @@ body {
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  background-color: white;
+  z-index: 2;
+  position: absolute;
+  top: 50px;
+
 }
 
 .FilterArea {
@@ -640,7 +655,7 @@ body {
 .SearchResultType {
   font-family: sans-serif;
   list-style-type: none;
-  font-size: small;
+  font-size: x-small;
   font-style: italic;
   color: #41553A;
   font-weight: 500;
@@ -669,8 +684,6 @@ body {
 .SearchResultArea {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  max-width: 800px;
   padding: 10px;
   margin: 10px;
   border: solid;
@@ -678,32 +691,110 @@ body {
   border-radius: 5px;
   border-color: #41553A;
   box-shadow: 0 0 10px #888;
-  background-color: aliceblue;
 }
 
 .SearchResultLeftSide {
-  flex: 1;
-  background-color: #41553A;
-  width: 100%;
+  width: 250px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SearchResultLeftSide .Button {
+  margin: 5px 0px 0px 0px;
+  width: 115px;
+}
+
+.ChangeImageContainer {
+  margin: 10px 0px 10px 0px;
   padding: 10px;
+  width: 220px;
+  background-color: #41553A;
+  border: solid;
+  border-radius: 5px;
+  border-color: #41553A;
+  border-width: thin;
+  box-shadow: 0 0 10px #888;
+  text-align: center;
+  color: white;
+  font-size: small;
+  font-weight: 500;
+  transition: all 0.5s;
+}
+
+.ChangeImageContainer:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #41553A;
+}
+
+.ChangeImageContainer label:hover {
+  cursor: pointer;
+}
+
+.SearchImage {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: solid;
+  border-width: thin;
+  border-color: #41553A;
+  box-shadow: 0 0 10px #888;
+}
+
+.SearchResultRightSide {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.ChangeImageContainer {
-  
+.SearchResultRightSide .Input {
+  margin: 0 10px 0 10px;
 }
 
-.SearchImage {
-  width: 100%;
+.SearchResultRightSide .Textarea {
   height: 100%;
-  object-fit: cover;
+  margin: 10px 10px 0 10px;
 }
 
-.SearchResultRightSide {
-  flex: 2;
-  background-color: #11240c;
-  width: 100%;
-  padding: 10px;
+.NewArtistArea {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+.NewExhibitionArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+.TimeInput {
+  padding: 10px 15px 10px 15px;
+  border: solid;
+  border-width: thin;
+  border-color: #41553A;
+  border-radius: 5px;
+  font-size: small;
+  font-weight: 500;
+  font-family: sans-serif;
+  color: white;
+  background-color: #41553A;
+  outline: none;
+  box-shadow: 0 0 10px #888;
+  margin: 10px;
+  transition: all 0.5s;
+}
+
+.TimeInput:hover {
+  cursor: pointer;
+  color: #41553A;
+  background-color: white;
 }
