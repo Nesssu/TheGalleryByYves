@@ -2,7 +2,25 @@ const express = require('express');
 const router = express.Router();
 const Subscribtions = require('../models/Subscribtions');
 const Exhibitions = require('../models/Exhibition');
+const Artists = require('../models/Artists');
 const {body, validationResult} = require("express-validator");
+const jwt = require("jsonwebtoken");
+
+const authenticateToken = (req, res, next) =>
+{
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1].replace(/"/g, '');
+  
+  if (token == null) return res.status(402).json({success: false});
+
+  jwt.verify(token, process.env.LOGIN_SECRET, (err, admin) =>
+  {
+    if (err) return res.status(402).json({success: false});
+
+    req.admin = admin;
+    next();
+  })
+}
 
 router.post('/api/add/subscribtion', body("email").isEmail(), (req, res, next) => 
 {
@@ -65,8 +83,39 @@ router.post('/api/add/new/exhibition', (req, res, next) =>
   const path_to_image = req.body.path_to_image;
 
   
-
   return res.send("ok");
+});
+
+router.post('/api/add/new/artist', (req, res, next) =>
+{
+  const name = req.body.name;
+  const bio = req.body.bio;
+  const image = req.body.image;
+
+  Artists.create({
+    name,
+    bio,
+    image,
+    contentType: "image/jpeg"
+  })
+  .then((doc) => 
+  {
+    return res.json({success: true, message: "Artist added!"})
+  })
+  .catch((err) =>
+  {
+    return res.status(402).json({success: false, message: "Error while adding artist!"})
+  });
+});
+
+router.get('/api/get/artists', (req, res) =>
+{
+  Artists.find()
+  .then((docs) =>
+  {
+    console.log(docs[0]);
+    return res.json({docs});
+  })
 })
 
 

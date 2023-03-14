@@ -1,14 +1,29 @@
 import '../App.css';
+import { useState, useEffect } from 'react';
 
 function Artist(props)
 {
+    const [src, setSrc] = useState("");
+
+    useEffect(() =>
+    {
+        if (props.artist)
+        {
+            setSrc(`data:image/jpeg;base64,${props.artist.image.data}`);
+        }
+    }, [])
+
+    useEffect(() =>
+    {
+        console.log(src);
+    }, [src])
+
     return (
         <div className='ArtistsInfoArea'>
-            <div className='ArtistsPhotoArea'>
-                <img alt="" src={require('../media/artist_' + props.photo + '.jpg')} className="ProfileImage" />
+            <div className='ArtistsPhotoArea' style={{backgroundImage: src && src}}>
             </div>
             <div className='ArtistsBioArea'>
-                <p className='BioText'>{props.bio}</p>
+                <p className='BioText'>{props.artist.bio}</p>
             </div>
         </div>
     )

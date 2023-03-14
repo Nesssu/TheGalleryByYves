@@ -241,13 +241,9 @@ body {
   border-radius: 10px;
   width: 250px;
   height: 250px;
-}
-
-.ProfileImage {
-  border-radius: 10px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-color: #888;
 }
 
 .ArtistsBioArea {
@@ -573,6 +569,13 @@ body {
   margin: 10px 0 10px 0;
 }
 
+.DashboardHeaderSmall {
+  font-size: medium;
+  color: #41553A;
+  font-weight: 500;
+  margin: 10px 0 10px 0;
+}
+
 .Navbar {
   width: 100vw;
   height: 50px;
@@ -707,41 +710,37 @@ body {
 }
 
 .ChangeImageContainer {
-  margin: 10px 0px 10px 0px;
-  padding: 10px;
-  width: 220px;
-  background-color: #41553A;
+  margin: 0px 0px 10px 0px;
+  width: 240px;
+  height: 240px;
   border: solid;
   border-radius: 5px;
   border-color: #41553A;
   border-width: thin;
   box-shadow: 0 0 10px #888;
-  text-align: center;
-  color: white;
-  font-size: small;
-  font-weight: 500;
+  background-size: cover;
+  background-position: center;
+  background-color: #e6e6e6;
   transition: all 0.5s;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .ChangeImageContainer:hover {
   cursor: pointer;
-  background-color: white;
+}
+
+.ImageIcon {
   color: #41553A;
+  font-size: 75px;
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s;
 }
 
 .ChangeImageContainer label:hover {
   cursor: pointer;
-}
-
-.SearchImage {
-  width: 240px;
-  height: 240px;
-  object-fit: cover;
-  border-radius: 5px;
-  border: solid;
-  border-width: thin;
-  border-color: #41553A;
-  box-shadow: 0 0 10px #888;
 }
 
 .SearchResultRightSide {
@@ -797,4 +796,48 @@ body {
   cursor: pointer;
   color: #41553A;
   background-color: white;
+}
+
+.UpdateInformationArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+.SubscribtionListArea {
+  width: 500px;
+  padding: 10px;
+  border: solid;
+  border-width: thin;
+  border-color: #41553A;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #888;
+  background-color: white;
+
+}
+
+.SubscribtionArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.EmailList {
+  max-height: 500px;
+  overflow: scroll;
+}
+
+.ListItem {
+  font-size: small;
+  font-weight: 500;
+  color: #41553A;
+  padding: 2px 0 2px 0;
+  transition: all 0.1s;
+}
+
+.ListItem:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

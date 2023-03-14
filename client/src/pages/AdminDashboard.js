@@ -2,155 +2,23 @@ import '../App.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { BiImageAdd } from 'react-icons/bi';
 
 function DataTempalte(props)
 {
-    const [searchData, setSearchData] = useState(props.searchData ? props.searchData : {});
+    const [name, setName] = useState(props.name ? props.name : "");
+    const [bio, setBio] = useState(props.bio ? props.bio : "");
+    const [title, setTitle] = useState(props.title ? props.title : "");
+    const [artist, setArtist] = useState(props.artist ? props.artist : "");
+    const [about, setAbout] = useState(props.about ? props.about : "");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [path, setPath] = useState(null);
+    const [image, setImage] = useState(null);
+    const [hover, setHover] = useState(false);
     const fileInputRef = useRef(null);
+
     const handleClick = () => { fileInputRef.current.click() }
-
-    const handleNameChange = (event) => { setSearchData({...searchData, name: event.target.value}) }
-    const handleBioChange = (event) => { setSearchData({...searchData, bio: event.target.value}) }
-    const handleTitleChange = (event) => { setSearchData({...searchData, title: event.target.value}) }
-    const handleArtistChange = (event) => { setSearchData({...searchData, artist: event.target.value}) }
-    const handleAboutChange = (event) => { setSearchData({...searchData, about: event.target.value}) }
-
-    const handleArtisDelete = () =>
-    {
-
-    }
-    const handleArtistSave = () =>
-    {
-
-    }
-    const handleArtistAdd = () =>
-    {
-
-    }
-    const handleExhibitionDelete = () =>
-    {
-
-    }
-    const handleExhibitionSave = () =>
-    {
-
-    }
-    const handleExhibitionAdd = () =>
-    {
-
-    }
-    const handlePathChange = (event) =>
-    {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(e)
-        {
-            setPath(e.target.result);
-        }
-        reader.readAsDataURL(file);
-    }
-
-    useEffect(() => 
-    {  
-        console.log(searchData.name);
-    }, [props]);
-
-    return (
-        <div className='SearchResultArea'>
-            <div className='SearchResultLeftSide'>
-                <img src={path ? path : require("../media/no_image.jpg")} className="SearchImage" alt="" />
-                <div className='ChangeImageContainer' onClick={handleClick} >
-                    <label htmlFor='BrowseImages'>Change Image</label>
-                    <input type="file" style={{display: "none"}} onChange={handlePathChange} id="BrowseImages" ref={fileInputRef} />
-                </div>
-                {props.type === "exhibition" && (
-                    <div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <input type={"date"} value={date} onChange={(e) => setDate(e.target.value)} className="TimeInput" style={{margin: "0 0 5px 0", width: "210px", textAlign: "center"}} />
-                        <input type={"time"} value={time} onChange={(e) => setTime(e.target.value)} className="TimeInput" style={{margin: "5px 0 5px 0", width: "210px", textAlign: "center"}} />
-                    </div>
-                )}
-                <div style={{display: "flex", alignItems: "center", width: "240px"}} >
-                    {props.protocol !== "add" ? (
-                        <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%"}} >
-                            <input type="button" className='Button' value="Delete" onClick={props.type === "exhibition" ? handleExhibitionDelete : handleArtisDelete} />
-                            <input type="button" className='Button' value="Save" onClick={props.type === "exhibition" ? handleExhibitionSave : handleArtistSave} />
-                        </div>
-                    ) : (
-                        <div>
-                            <input type="button" className='Button' style={{width: "240px"}} value="Add" onClick={props.type === "exhibition" ? handleExhibitionAdd : handleArtistAdd} />
-                        </div>
-                    )}
-                </div>
-            </div>
-
-            <div style={{width: "500px", padding: "5px"}} >
-                {props.type === "artist" ? (
-                    <div className='SearchResultRightSide'>
-                        <input type="text" className='Input' value={searchData.name} onChange={handleNameChange} placeholder="Name" />
-                        <textarea className='Textarea' value={searchData.bio} onChange={handleBioChange} placeholder="Bio" />
-                    </div>
-                ) : (
-                    <div className='SearchResultRightSide'>
-                        <input type="text" className='Input' value={searchData.title} onChange={handleTitleChange} placeholder="Title" />
-                        <input type="text" className='Input' value={searchData.artist} onChange={handleArtistChange} placeholder="Artist" style={{margin: "10px 10px 0 10px"}} />
-                        <textarea className='Textarea' value={searchData.about} onChange={handleAboutChange} placeholder="About" />
-                    </div>
-                )}
-            </div>
-        </div>
-    )
-};
-
-function ResultList(props)
-{
-    const emails = props.emails.filter(email => email.email.includes(props.searchTerm.toLowerCase()));
-    const items = emails.slice(0, 5);
-    return (
-        <div className='SearchListBackground'>
-            <ul style={{padding: "0", margin: "0", width: "100%"}}>
-                {items.length !== 0 ? ( <div>
-                    {items.map((email, index) => 
-                    (
-                        <div key={index} className='FilterArea' onClick={() => props.search(email.email)} >
-                            <li className="SearchResultItem">{email.email}</li>
-                            <li className="SearchResultType">Email</li>
-                        </div>
-                    ))} </div> )
-                    : 
-                    ( <div key={"abc"}>
-                        <p className='EmptySearchBar' >
-                            No results
-                        </p>
-                    </div> )
-                }
-            </ul>
-        </div>
-    )
-}
-
-function AdminDashboard(props)
-{
-    const ArtistRef = useRef(null);
-    const ExhibitionRef = useRef(null);
-    const InformationRef = useRef(null);
-    const SubscribtionRef = useRef(null);
-
-    const navigate = useNavigate();
-    const [adminIDOne, setAdminIDOne] = useState("");
-    const [adminIDTwo, setAdminIDTwo] = useState("");
-    const [passwordOne, setPasswordOne] = useState("");
-    const [passwordTwo, setPasswordTwo] = useState("");
-    const [emails, setEmails] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [showSearch, setShowSearch] = useState(false);
-    const [searchData, setSearchData] = useState({});
-    const [protocol, setProtocol] = useState("");
-    const [type, setType] = useState("");
-    
     const showToast = (message, type) =>
     {
         if (type === "warning")
@@ -182,9 +50,198 @@ function AdminDashboard(props)
             );
         }
     }
+    const handleArtisDelete = () =>
+    {
+
+    }
+    const handleArtistSave = () =>
+    {
+
+    }
+    const handleArtistAdd = () =>
+    {
+        if (name !== "" && bio !== "")
+        {
+            const body = {
+                name,
+                bio,
+                image
+            };
+
+            fetch('/api/add/new/artist', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": localStorage.getItem("TheGalleryByYves_AdminToken")
+                },
+                body: JSON.stringify(body)
+            })
+            .then(response => response.json())
+            .then(json => 
+                {
+                    if (json.success) showToast(json.message, "success");
+                    else showToast(json.message, "warning");
+                })
+            setName("");
+            setBio("");
+        }
+        else
+        {
+            showToast("Name or bio cannot be empty", "warning");
+        }
+    }
+    const handleExhibitionDelete = () =>
+    {
+
+    }
+    const handleExhibitionSave = () =>
+    {
+
+    }
+    const handleExhibitionAdd = () =>
+    {
+
+    }
+    const handlePathChange = (event) =>
+    {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e)
+        {
+            setPath(`url(${e.target.result})`);
+            setImage(reader.result);
+        }
+        reader.readAsDataURL(file);
+    }
+
+    useEffect(() => 
+    {  
+        console.log(path);
+    }, [props, path]);
+
+    return (
+        <div className='SearchResultArea'>
+            <div className='SearchResultLeftSide'>
+                <div className='ChangeImageContainer' onClick={handleClick} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{backgroundImage: path && path}} >
+                    <BiImageAdd className='ImageIcon' style={{opacity: hover ? "1" : "0" }} />
+                    <input type="file" style={{display: "none"}} onChange={handlePathChange} id="BrowseImages" ref={fileInputRef} />
+                </div>
+                {props.type === "exhibition" && (
+                    <div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center"}}>
+                        <input type={"date"} value={date} onChange={(e) => setDate(e.target.value)} className="TimeInput" style={{margin: "0 0 5px 0", width: "210px", textAlign: "center"}} />
+                        <input type={"time"} value={time} onChange={(e) => setTime(e.target.value)} className="TimeInput" style={{margin: "5px 0 5px 0", width: "210px", textAlign: "center"}} />
+                    </div>
+                )}
+                <div style={{display: "flex", alignItems: "center", width: "240px"}} >
+                    {props.protocol !== "add" ? (
+                        <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%"}} >
+                            <input type="button" className='Button' value="Delete" onClick={props.type === "exhibition" ? handleExhibitionDelete : handleArtisDelete} />
+                            <input type="button" className='Button' value="Save" onClick={props.type === "exhibition" ? handleExhibitionSave : handleArtistSave} />
+                        </div>
+                    ) : (
+                        <div>
+                            <input type="button" className='Button' style={{width: "240px"}} value="Add" onClick={props.type === "exhibition" ? handleExhibitionAdd : handleArtistAdd} />
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <div style={{width: "500px", padding: "5px"}} >
+                {props.type === "artist" ? (
+                    <div className='SearchResultRightSide'>
+                        <input type="text" className='Input' value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+                        <textarea className='Textarea' value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Bio" />
+                    </div>
+                ) : (
+                    <div className='SearchResultRightSide'>
+                        <input type="text" className='Input' value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+                        <input type="text" className='Input' value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Artist" style={{margin: "10px 10px 0 10px"}} />
+                        <textarea className='Textarea' value={about} onChange={(e) => setAbout(e.target.value)} placeholder="About" />
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+};
+
+function ResultList(props)
+{
+    const emails = props.emails.filter(email => email.email.includes(props.searchTerm.toLowerCase()));
+    const items = emails.slice(0, 5);
+    return (
+        <div className='SearchListBackground'>
+            <ul style={{padding: "0", margin: "0", width: "100%"}}>
+                {items.length !== 0 ? ( <div>
+                    {items.map((email, index) => 
+                    (
+                        <div key={index} className='FilterArea' onClick={() => props.search(email)} >
+                            <li className="SearchResultItem">{email.email}</li>
+                            <li className="SearchResultType">Email</li>
+                        </div>
+                    ))} </div> )
+                    : 
+                    ( <div key={"abc"}>
+                        <p className='EmptySearchBar' >
+                            No results
+                        </p>
+                    </div> )
+                }
+            </ul>
+        </div>
+    )
+}
+
+function SubscribtionList(props)
+{
+    const [emails, setEmails] = useState([]);
+
+    useEffect(() => 
+    {
+        fetch('/api/get/subscribtions', {
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(json =>
+            {
+                setEmails(json.docs);
+            }
+        )
+    }, [])
+
+    return (
+        <div className='SubscribtionListArea'>
+            <p className='DashboardHeaderSmall'>SUBSCRIBED EMAILS</p>
+            <div className='HorizontalSeparator' />
+            {emails.length !== 0 ? (
+                <div className='EmailList'>
+                    <ul style={{padding: 0}}>
+                        {emails.map((email, index) =>
+                        (
+                            <li className='ListItem' key={email._id}>{email.email}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+            :
+            (
+                <div>
+
+                </div>
+            )}
+        </div>
+    )
+}
+
+function UpdateInformation(props)
+{
+    const [adminIDOne, setAdminIDOne] = useState("");
+    const [adminIDTwo, setAdminIDTwo] = useState("");
+    const [passwordOne, setPasswordOne] = useState("");
+    const [passwordTwo, setPasswordTwo] = useState("");
     const updateAdminID = () =>
     {
-        if (adminIDOne === adminIDTwo)
+        if (adminIDOne === adminIDTwo && adminIDOne !== "" && adminIDTwo !== "")
         {
             fetch("/api/update/id", {
                 method: "PUT",
@@ -219,7 +276,7 @@ function AdminDashboard(props)
     }
     const updatePassword = () =>
     {
-        if (passwordOne === passwordTwo)
+        if (passwordOne === passwordTwo && passwordOne !== "" && passwordTwo !== "")
         {
             fetch("/api/update/password", {
                 method: "PUT",
@@ -251,15 +308,83 @@ function AdminDashboard(props)
             showToast("The passwords are not the same!", "warning");
         }
     }
+    const showToast = (message, type) =>
+    {
+        if (type === "warning")
+        {
+            toast.warning(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                }
+            );
+        }
+        else if (type === "success")
+        {
+            toast.success(message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                }
+            );
+        }
+    }
+
+    return (
+        <div className='UpdateInformationArea'>
+            <p className='DashboardHeaderSmall'>ADMIN ID</p>
+            <input type="text" className="Input" value={adminIDOne} onChange={(e) => { setAdminIDOne(e.target.value) }} placeholder="New ID" />
+            <input type="text" className="Input" value={adminIDTwo} onChange={(e) => { setAdminIDTwo(e.target.value) }} placeholder="Confirm ID" />
+            <input type="button" value="Update" className='Button' onClick={updateAdminID} />
+
+            <p className='DashboardHeaderSmall'>PASSWORD</p>
+            <input type="password" className="Input" value={passwordOne} onChange={(e) => { setPasswordOne(e.target.value) }} placeholder="New Password" />
+            <input type="password" className="Input" value={passwordTwo} onChange={(e) => { setPasswordTwo(e.target.value) }} placeholder="Confirm Password" />
+            <input type="button" value="Update" className='Button' onClick={updatePassword} />
+        </div>
+    )
+}
+
+function AdminDashboard(props)
+{
+    const ArtistRef = useRef(null);
+    const ExhibitionRef = useRef(null);
+    const InformationRef = useRef(null);
+    const SubscribtionRef = useRef(null);
+
+    const navigate = useNavigate();
+    const [emails, setEmails] = useState([]);
+    const [name, setName] = useState("");
+    const [bio, setBio] = useState("");
+    const [title, setTitle] = useState("");
+    const [artist, setArtist] = useState("");
+    const [about, setAbout] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [showSearch, setShowSearch] = useState(false);
+    const [searchData, setSearchData] = useState({});
+    const [protocol, setProtocol] = useState("");
+    const [type, setType] = useState("");
+
     const logout = () => 
     {
         localStorage.removeItem("TheGalleryByYves_AdminToken");
         navigate("/admin");
     }
     const scrollToView = (ref) => { ref.current.scrollIntoView(); }
-    const search = (value) =>
+    const search = (object) =>
     {
-        setSearchData({ ...searchData, name: value, bio: value + "s' bio will be here!" })
+        setName(object.email);
+        setBio(object.email + "s' bio will be here");
         setType("artist");
         setProtocol("edit")
         setShowSearch(true);
@@ -331,7 +456,7 @@ function AdminDashboard(props)
             {showSearch && (
                 <div style={{textAlign: "center"}}>
                     <h1 className='DashboardHeader'>SEARCH RESULT</h1>
-                    <DataTempalte type={type} protocol={protocol} searchData={searchData} />
+                    <DataTempalte type={type} protocol={protocol} name={name} bio={bio} title={title} artist={artist} about={about} />
                 </div>
             )}
 
@@ -346,11 +471,13 @@ function AdminDashboard(props)
             </div>
 
             <div className='SubscribtionArea' ref={SubscribtionRef}>
-
+                <h1 className='DashboardHeader'>NEWS LETTER SUBSCRIBTIONS</h1>
+                <SubscribtionList />
             </div>
 
             <div className='InformationArea' ref={InformationRef}>
-
+                <h1 className='DashboardHeader'>UPDATE ADMIN INFROMATION</h1>
+                <UpdateInformation />
             </div>
 
             <ToastContainer />

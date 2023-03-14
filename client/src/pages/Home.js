@@ -14,6 +14,7 @@ function Home() {
     const CurrentRef = useRef(null);
 
     const [email, setEmail] = useState("");
+    const [artists, setArtists] = useState([]);
 
     const scrollToRef = (ref) => { if (ref.current) { ref.current.scrollIntoView(); CurrentRef.current = ref.current; } }
     const handleEmailChange = (event) => { setEmail(event.target.value); }
@@ -55,6 +56,16 @@ function Home() {
         if (CurrentRef) scrollToRef(CurrentRef);
         else scrollToRef(HomeRef);
 
+
+        fetch('/api/get/artists', {
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(json =>
+            {
+                setArtists(json.docs);
+            })
+
         const handleResize = () =>
         {
             if (CurrentRef) CurrentRef.current.scrollIntoView();
@@ -67,6 +78,7 @@ function Home() {
         {
             window.removeEventListener("resize", handleResize);
         }
+
     }, []);
 
     useEffect(() =>
@@ -142,8 +154,11 @@ function Home() {
 
                         <h1 className='Header'>Artists</h1>
 
-                        <Artist photo={"one"} bio={"Alexandre is a 29 year old French painter who has been passionate about art since he was a child. He studied Fine Arts at the University of Paris and specializes in oil painting. His work has been featured in numerous exhibitions throughout France, as well as galleries across Europe. He draws inspiration from traditional French landscapes and his own life experiences, creating captivating paintings that explore themes of love, loss, and beauty. When not painting, Alexandre likes to spend time exploring the countryside with his dog or enjoying good food with friends."} />
-                        <Artist photo={"two"} bio={"Sara is a 35 year old painter from New York. She has been painting since she was a teenager, and her work is inspired by nature and the human experience. Her paintings are often vibrant and expressive, reflecting a unique perspective on life. Sara has exhibited her artwork in various galleries across the U.S., as well as internationally. In addition to painting, she also teaches art classes at local universities and colleges throughout the area."} />
+                        {artists.length !== 0 && 
+                            artists.map((artist) => (
+                                <Artist artist={artist} key={artist._id} />        
+                           ))
+                        }
 
                     </div>
 
@@ -155,7 +170,7 @@ function Home() {
                 <div className="ExhibitionsBackground" ref={ExhibitionsRef} >
                     
                     <div className='ExhibitionsArea'>
-                        <div className='BackLinkArea' onClick={() => scrollToRef(HomeRef)} style={{"flex-direction": "column"}} >
+                        <div className='BackLinkArea' onClick={() => scrollToRef(HomeRef)} style={{flexDirection: "column"}} >
                             <IoIosArrowUp className='LinkArrow'/>
                             <p className='LinkText'>Back</p>
                         </div>
