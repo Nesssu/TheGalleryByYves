@@ -253,13 +253,22 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px #888;
   padding: 5px 10px 5px 10px;
+  overflow: scroll;
 }
 
 .BioText {
-  font-size: medium;
+  font-size: small;
   font-weight: 500;
   color: #41553A;
   margin: 0;
+}
+
+.BioName {
+  font-size: large;
+  font-weight: 500;
+  color: #41553A;
+  margin: 0 0 10px 0;
+  text-decoration: underline;
 }
 
 @media only screen and (max-width: 800px) {
@@ -551,7 +560,7 @@ body {
 /* STYLING FOR THE ADMIN DASHBOARD PAGE */
 .DashboardBackground {
   width: 100vw;
-  background-color: white;
+  background-color: #41553A;
   height: calc(100vh - 90px);
   display: flex;
   flex-direction: column;
@@ -563,7 +572,7 @@ body {
 
 .DashboardHeader {
   font-size: x-large;
-  color: #41553A;
+  color: white;
   font-weight: 500;
   text-decoration: underline;
   margin: 10px 0 10px 0;
@@ -571,7 +580,7 @@ body {
 
 .DashboardHeaderSmall {
   font-size: medium;
-  color: #41553A;
+  color: white;
   font-weight: 500;
   margin: 10px 0 10px 0;
 }
@@ -583,10 +592,12 @@ body {
   flex-direction: row;
   background-color:#41553A;
   z-index: 2;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: white;
   align-items: center;
   justify-content: space-evenly;
   position: fixed;
-  box-shadow: 0 0 10px #888;
   top: 0; 
 }
 
@@ -616,6 +627,8 @@ body {
   width: 100%;
   padding: 10px 15px 10px 15px;
   margin: 10px 10px 0 10px;
+  box-shadow: none;
+  border-color: white;
 }
 
 .SearchListBackground {
@@ -626,7 +639,6 @@ body {
   border: solid;
   border-width: thin;
   border-color: #41553A;
-  box-shadow: 0 0 10px #888;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -692,8 +704,8 @@ body {
   border: solid;
   border-width: thin;
   border-radius: 5px;
-  border-color: #41553A;
-  box-shadow: 0 0 10px #888;
+  border-color: white;
+  background-color: white;
 }
 
 .SearchResultLeftSide {
@@ -806,14 +818,24 @@ body {
   transition: all 0.25s;
 }
 
+.UpdateInformationArea .Input {
+  box-shadow: none;
+  width: 100%;
+  border-color: white;
+}
+
+.UpdateInformationArea .Button {
+  box-shadow: none;
+  border-color: white;
+}
+
 .SubscribtionListArea {
   width: 500px;
   padding: 10px;
   border: solid;
   border-width: thin;
-  border-color: #41553A;
+  border-color: white;
   border-radius: 5px;
-  box-shadow: 0 0 10px #888;
   background-color: white;
 
 }

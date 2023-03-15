@@ -80,10 +80,36 @@ router.post('/api/add/new/exhibition', (req, res, next) =>
   const artist = req.body.artist;
   const about = req.body.about;
   const date = req.body.date;
-  const path_to_image = req.body.path_to_image;
+  const time = req.body.time;
+  const image = req.body.image;
 
-  
-  return res.send("ok");
+  Exhibitions.create({
+    title,
+    artist,
+    about,
+    date,
+    time,
+    image,
+    type: "exhibition",
+    contentType: "image/jpeg"
+  })
+  .then((doc) => 
+  {
+    return res.json({success: true, message: "Exhibition added!"})
+  })
+  .catch((err) =>
+  {
+    return res.status(402).json({success: false, message: "Error while adding exhibition!"})
+  });
+});
+
+router.get('/api/get/exhibitions', (req, res) =>
+{
+  Exhibitions.find()
+  .then((docs) =>
+  {
+    return res.json({docs});
+  })
 });
 
 router.post('/api/add/new/artist', (req, res, next) =>
@@ -96,6 +122,7 @@ router.post('/api/add/new/artist', (req, res, next) =>
     name,
     bio,
     image,
+    type: "artist",
     contentType: "image/jpeg"
   })
   .then((doc) => 
@@ -113,7 +140,6 @@ router.get('/api/get/artists', (req, res) =>
   Artists.find()
   .then((docs) =>
   {
-    console.log(docs[0]);
     return res.json({docs});
   })
 })

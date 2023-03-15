@@ -154,10 +154,17 @@ function Home() {
 
                         <h1 className='Header'>Artists</h1>
 
-                        {artists.length !== 0 && 
+                        {artists.length !== 0 ? (
                             artists.map((artist) => (
                                 <Artist artist={artist} key={artist._id} />        
                            ))
+                        ) 
+                        :
+                        (
+                            <div>
+                                <p style={{fontSize: "xx-large", color: "#41553A", fontWeight: "lighter", fontStyle: "italic", margin: "100px 0 0 0"}}>This page is being updated</p>
+                            </div>
+                        )
                         }
 
                     </div>

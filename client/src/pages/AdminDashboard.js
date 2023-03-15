@@ -68,6 +68,8 @@ function DataTempalte(props)
                 image
             };
 
+            console.log(body);
+
             fetch('/api/add/new/artist', {
                 method: "POST",
                 headers: {
@@ -100,7 +102,41 @@ function DataTempalte(props)
     }
     const handleExhibitionAdd = () =>
     {
+        if (title !== "" && artist !== "" && about !== "" && date !== "" && time !== "")
+        {
+            const body = {
+                title,
+                artist,
+                about,
+                date,
+                time,
+                image
+            };
 
+            fetch('/api/add/new/exhibition', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": localStorage.getItem("TheGalleryByYves_AdminToken")
+                },
+                body: JSON.stringify(body)
+            })
+            .then(response => response.json())
+            .then(json => 
+                {
+                    if (json.success) showToast(json.message, "success");
+                    else showToast(json.message, "warning");
+                })
+            setTitle("");
+            setArtist("");
+            setAbout("");
+            setDate("");
+            setTime("");
+        }
+        else
+        {
+            showToast("Title, artist, bio, date or time cannot be empty", "warning");
+        }
     }
     const handlePathChange = (event) =>
     {
@@ -110,15 +146,14 @@ function DataTempalte(props)
         reader.onload = function(e)
         {
             setPath(`url(${e.target.result})`);
-            setImage(reader.result);
+            setImage(reader.result.replace("data:", "").replace(/^.+,/, ""));
         }
         reader.readAsDataURL(file);
     }
 
     useEffect(() => 
     {  
-        console.log(path);
-    }, [props, path]);
+    }, [props]);
 
     return (
         <div className='SearchResultArea'>
@@ -211,7 +246,7 @@ function SubscribtionList(props)
 
     return (
         <div className='SubscribtionListArea'>
-            <p className='DashboardHeaderSmall'>SUBSCRIBED EMAILS</p>
+            <p className='DashboardHeaderSmall' style={{color: "#41553A"}} >SUBSCRIBED EMAILS</p>
             <div className='HorizontalSeparator' />
             {emails.length !== 0 ? (
                 <div className='EmailList'>
@@ -476,7 +511,7 @@ function AdminDashboard(props)
             </div>
 
             <div className='InformationArea' ref={InformationRef}>
-                <h1 className='DashboardHeader'>UPDATE ADMIN INFROMATION</h1>
+                <h1 className='DashboardHeader'>UPDATE ADMIN INFORMATION</h1>
                 <UpdateInformation />
             </div>
 
