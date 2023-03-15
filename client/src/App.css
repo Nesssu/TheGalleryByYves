@@ -557,6 +557,20 @@ body {
   color: #41553A;
   margin: 0 0 40px 0;
 }
+
+.AdminRegisterInfoText {
+  font-size: medium;
+  font-weight: 500;
+  color: #41553A;
+  position: absolute;
+  bottom: 10px;
+}
+
+.AdminRegisterInfoText a {
+  text-decoration: underline;
+  color: #11240c;
+}
+
 /* STYLING FOR THE ADMIN DASHBOARD PAGE */
 .DashboardBackground {
   width: 100vw;

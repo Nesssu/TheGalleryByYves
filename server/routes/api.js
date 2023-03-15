@@ -127,6 +127,37 @@ router.post('/login', (req, res, next) =>
   });
 });
 
+router.post('/register', (req, res, next) =>
+{
+  const adminID = req.body.adminID;
+  const password = req.body.password;
+
+  Admin.findOne({adminID}).then(admin =>
+    {
+      if (admin) return res.json({success: false, message: "Admin ID is already taken!"});
+      else
+      {
+        bcrypt.genSalt(10, (err, salt) =>
+        {
+          bcrypt.hash(password, salt, (err, hash) =>
+          {
+            if (err) { return res.status(402).json({ success: false }); }
+            Admin.create({adminID: adminID, password: hash})
+              .then((doc) =>
+              {
+                return res.status(200).json({success: true});
+              })
+              .catch((err) =>
+              {
+                if (err) { return res.status(402).json({success: false, message: "Error while registering!"}); }
+              }
+            )
+          })
+        })
+      }
+    })
+});
+
 router.post('/verify/token', (req, res) =>
 {
   const token = req.body.token.replace(/"/g, '');

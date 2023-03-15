@@ -51,7 +51,7 @@ function Home() {
     {
         const storedRef = localStorage.getItem("TheGalleryByYves_CurrentRef");
 
-        if (storedRef) CurrentRef.current = JSON.parse(storedRef);
+        if (storedRef && CurrentRef) CurrentRef.current = JSON.parse(storedRef);
 
         if (CurrentRef) scrollToRef(CurrentRef);
         else scrollToRef(HomeRef);
@@ -68,7 +68,7 @@ function Home() {
 
         const handleResize = () =>
         {
-            if (CurrentRef) CurrentRef.current.scrollIntoView();
+            if (CurrentRef.current) CurrentRef.current.scrollIntoView();
             else HomeRef.current.scrollIntoView();
         }
 

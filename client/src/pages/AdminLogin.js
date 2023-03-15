@@ -60,6 +60,8 @@ function Login(props)
             <input type="password" placeholder='Password' value={password} onChange={handlePasswordChange} className="Input" />
             <input type="submit" value="Login" className='Button' onClick={handleLogin} />
 
+            <p className='•••AdminRegisterInfoText'>Because this is not an official website, you can create an admin account <a href="/admin/register">from here</a>, if you want to test the website!</p>
+
             <ToastContainer />
         
         </div>
