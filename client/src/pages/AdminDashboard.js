@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { BiImageAdd } from 'react-icons/bi';
+import { GiCancel } from 'react-icons/gi';
 
 function DataTempalte(props)
 {
@@ -12,7 +13,6 @@ function DataTempalte(props)
     const [artist, setArtist] = useState(props.artist ? props.artist : "");
     const [about, setAbout] = useState(props.about ? props.about : "");
     const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
     const [path, setPath] = useState(null);
     const [image, setImage] = useState(null);
     const [hover, setHover] = useState(false);
@@ -102,14 +102,13 @@ function DataTempalte(props)
     }
     const handleExhibitionAdd = () =>
     {
-        if (title !== "" && artist !== "" && about !== "" && date !== "" && time !== "")
+        if (title !== "" && artist !== "" && about !== "" && date !== "")
         {
             const body = {
                 title,
                 artist,
                 about,
                 date,
-                time,
                 image
             };
 
@@ -131,7 +130,6 @@ function DataTempalte(props)
             setArtist("");
             setAbout("");
             setDate("");
-            setTime("");
         }
         else
         {
@@ -165,7 +163,6 @@ function DataTempalte(props)
                 {props.type === "exhibition" && (
                     <div style={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center"}}>
                         <input type={"date"} value={date} onChange={(e) => setDate(e.target.value)} className="TimeInput" style={{margin: "0 0 5px 0", width: "210px", textAlign: "center"}} />
-                        <input type={"time"} value={time} onChange={(e) => setTime(e.target.value)} className="TimeInput" style={{margin: "5px 0 5px 0", width: "210px", textAlign: "center"}} />
                     </div>
                 )}
                 <div style={{display: "flex", alignItems: "center", width: "240px"}} >
@@ -230,6 +227,48 @@ function ResultList(props)
 function SubscribtionList(props)
 {
     const [emails, setEmails] = useState([]);
+    const [update, setUpdate] = useState(true);
+
+    const ListItem = (props) =>
+    {
+        const [show, setShow] = useState(false);
+
+        const onDelete = (email) =>
+        {
+            const body = {
+                email
+            };
+    
+            fetch('/api/delete/subscribtion', {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    'authorization': localStorage.getItem("TheGalleryByYves_AdminToken")
+                },
+                body: JSON.stringify(body)
+            })
+            .then(response => response.json())
+            .then(json =>
+                {
+                    if (json.success)
+                    {
+                        props.setUpdate(!props.update);
+                        setShow(false);
+                    }
+                })
+        }
+
+        return (
+            <div className='ListItem' onClick={() => setShow(!show)}>
+                <li key={props._id} >{props.email}</li>
+                {show === true &&
+                    <div>
+                        <p onClick={() => onDelete(props.email)} className='DeleteButton'>DELETE</p>
+                    </div>
+                }
+            </div>
+        )
+    }
 
     useEffect(() => 
     {
@@ -242,18 +281,21 @@ function SubscribtionList(props)
                 setEmails(json.docs);
             }
         )
-    }, [])
+    }, [update]);
 
     return (
         <div className='SubscribtionListArea'>
-            <p className='DashboardHeaderSmall' style={{color: "#41553A"}} >SUBSCRIBED EMAILS</p>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                <p className='DashboardHeaderSmall' style={{color: "#41553A"}} >SUBSCRIBED EMAILS</p>
+                <p className='DashboardHeaderSmall' style={{color: "#41553A"}}>TOTAL: {emails.length}</p>
+            </div>
             <div className='HorizontalSeparator' />
             {emails.length !== 0 ? (
                 <div className='EmailList'>
                     <ul style={{padding: 0}}>
-                        {emails.map((email, index) =>
+                        {emails.map((email) =>
                         (
-                            <li className='ListItem' key={email._id}>{email.email}</li>
+                            <ListItem _id={email._id} email={email.email} setUpdate={setUpdate} update={update} />
                         ))}
                     </ul>
                 </div>
@@ -261,7 +303,7 @@ function SubscribtionList(props)
             :
             (
                 <div>
-
+                    <p className='EmptySearchBar'>No subscribtions yet</p>
                 </div>
             )}
         </div>
@@ -276,7 +318,11 @@ function UpdateInformation(props)
     const [passwordTwo, setPasswordTwo] = useState("");
     const updateAdminID = () =>
     {
-        if (adminIDOne === adminIDTwo && adminIDOne !== "" && adminIDTwo !== "")
+        if (adminIDOne === "" && adminIDTwo === "")
+        {
+            showToast("The ID can't be empty", "warning");
+        }
+        else if (adminIDOne === adminIDTwo)
         {
             fetch("/api/update/id", {
                 method: "PUT",
@@ -311,7 +357,11 @@ function UpdateInformation(props)
     }
     const updatePassword = () =>
     {
-        if (passwordOne === passwordTwo && passwordOne !== "" && passwordTwo !== "")
+        if (passwordOne === "" && passwordTwo === "")
+        {
+            showToast("The password can't be empty", "warning");
+        }
+        else if (passwordOne === passwordTwo)
         {
             fetch("/api/update/password", {
                 method: "PUT",
@@ -474,10 +524,7 @@ function AdminDashboard(props)
         <div className='DashboardBackground'>
 
             <div className='Navbar'>
-                <p className='NavbarLink' onClick={() => scrollToView(ArtistRef)}>ARTISTS</p>
-                <p className='NavbarLink' onClick={() => scrollToView(ExhibitionRef)}>EXHIBITIONS</p>
-                <p className='NavbarLink' onClick={() => scrollToView(SubscribtionRef)}>SUBSCRIBTIONS</p>
-                <p className='NavbarLink' onClick={() => scrollToView(InformationRef)}>INFORMATION</p>
+                <h1 className='NavbarHeader'>ADMIN DASHBOARD</h1>
                 <p className='NavbarLink' onClick={logout} >LOGOUT</p>
             </div>
 

@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const authenticateToken = (req, res, next) =>
 {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1].replace(/"/g, '');
+  const token = authHeader && authHeader.replace(/"/g, '');
   
   if (token == null) return res.status(402).json({success: false});
 
@@ -50,6 +50,21 @@ router.post('/api/add/subscribtion', body("email").isEmail(), (req, res, next) =
     }
   })
 });
+
+router.delete('/api/delete/subscribtion', authenticateToken, (req, res, next) =>
+{
+  const email = req.body.email;
+
+  Subscribtions.findOneAndDelete({email})
+  .then(doc =>
+    {
+      return res.json({success: true});
+    })
+  .catch(err =>
+    {
+      return res.status(403).json({message: false});
+    })
+})
 
 router.get('/api/get/subscribtions', (req, res) =>
 {

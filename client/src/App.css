@@ -575,13 +575,13 @@ body {
 .DashboardBackground {
   width: 100vw;
   background-color: #41553A;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 120px);
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: scroll;
   scroll-behavior: smooth;
-  padding: 60px 0 30px 0;
+  padding: 60px 0 60px 0;
 }
 
 .DashboardHeader {
@@ -610,7 +610,7 @@ body {
   border-width: thin;
   border-color: white;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   position: fixed;
   top: 0; 
 }
@@ -620,12 +620,22 @@ body {
   font-weight: normal;
   font-family: sans-serif;
   color: white;
+  margin: 0 50px 0 0;
   transition: all 0.5s;
 }
 
 .NavbarLink:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.NavbarHeader {
+  font-size: x-large;
+  color: white;
+  font-weight: bold;
+  margin: 0 0 0 50px;
+  font-family: sans-serif;
+
 }
 
 .SearchBarArea {
@@ -824,11 +834,19 @@ body {
   background-color: white;
 }
 
+.InformationArea {
+  width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .UpdateInformationArea {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
   transition: all 0.25s;
 }
 
@@ -844,7 +862,7 @@ body {
 }
 
 .SubscribtionListArea {
-  width: 500px;
+  width: 770px;
   padding: 10px;
   border: solid;
   border-width: thin;
@@ -866,14 +884,37 @@ body {
 }
 
 .ListItem {
-  font-size: small;
-  font-weight: 500;
-  color: #41553A;
   padding: 2px 0 2px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   transition: all 0.1s;
 }
 
-.ListItem:hover {
+.ListItem li {
+  font-size: small;
+  font-weight: 500;
+  color: #41553A;
+}
+
+.ListItem:hover li {
   text-decoration: underline;
+}
+
+.ListItem:hover {
   cursor: pointer;
+}
+
+.DeleteButton {
+  color: rgb(203, 24, 24);
+  font-size: small;
+  font-weight: normal;
+  margin: 0 10px 0 0;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.DeleteButton:hover {
+  text-decoration: underline;
+  color: rgb(115, 6, 6);
 }
